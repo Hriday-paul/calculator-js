@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculator</title>
+</head>
+<body>
+    <div class="calcu">
+        <h1>Calculator</h1>
+        <div class="card">
+            <div class="calc-head">
+                <input type="text" placeholder="0" id="result" maxlength="50">
+            </div>
+            <div class="calc-body">
+                <div id="parent">
+                    <input type="button" class="btn"value="C">
+                    <input type="button" class="btn"value="(">
+                    <input type="button" class="btn"value=")">
+                    <input type="button" class="btn btn-style"value="/">
+                    <input type="button" class="btn"value="7">
+                    <input type="button" class="btn"value="8">
+                    <input type="button" class="btn"value="9">
+                    <input type="button" class="btn btn-style"value="*">
+                    <input type="button" class="btn"value="4">
+                    <input type="button" class="btn"value="5">
+                    <input type="button" class="btn"value="6">
+                    <input type="button" class="btn btn-style"value="-">
+                    <input type="button" class="btn"value="1">
+                    <input type="button" class="btn"value="2">
+                    <input type="button" class="btn"value="3">
+                    <input type="button" class="btn btn-style"value="+">
+                    <input type="button" class="btn"value="0">
+                    <input type="button" class="btn"value=".">
+                    <input type="button" class="btn"value="√">
+                    <input type="button" class="btn btn-eql"value="=">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+            var result = document.querySelector("#result");
+            var dad = document.querySelector("#parent");
+            var btn_len = dad.children.length;
+            for (let i = 0; i<btn_len-1; i++){
+                    dad.children[i].addEventListener("click", function(){
+                    var btn_value = dad.children[i].value;
+                    if(btn_value!="C"){
+                        result.value+=btn_value;
+                    }
+                    else{
+                        result.value="";
+                    }
+                })
+            }
+
+            //calculation
+            document.querySelector(".btn-eql").addEventListener("click",function(){
+                let res = document.querySelector("#result").value;
+                if(res[0]=="√"){
+                    try{
+                    document.querySelector("#result").value = Math.sqrt(parseInt(res.slice(1,res.length)));
+                    }
+                    catch{
+                        document.querySelector("#result").value = "syntax error"
+                    }
+                }
+                else if(res[res.length-1]=="√"){
+                    try{
+                        document.querySelector("#result").value = Math.sqrt(parseInt(res.slice(0,res.length-1)));
+                    }catch{
+                        document.querySelector("#result").value = "syntax error"
+                    }
+                }
+                else{
+                    try{
+                        document.querySelector("#result").value = eval(res);
+                    }
+                    catch{
+                        document.querySelector("#result").value = "syntax error"
+                    }
+                }
+            })
+    </script>
+</body>
+</html>
